@@ -19,7 +19,7 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get ('/api/products', (req, res, next) => {
+app.get('/api/products', (req, res, next) => {
   const sql = `
     select "productId",
           "name",
@@ -32,6 +32,35 @@ app.get ('/api/products', (req, res, next) => {
   db.query(sql)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+})
+
+app.get('/api/products/:productId', (req, res, next) => {
+  const sql = `
+    select "productId",
+          "name",
+          "price",
+          "image",
+          "shortDescription",
+          "longDescription"
+    from "products"
+    where "productId" = $1;
+  `
+  const productId = req.params.productId;
+
+  const params = [productId];
+
+  db.query(sql, params)
+    .then(result => {
+      const product = result.rows[0];
+      if (!product) {
+        res
+          .status(404)
+          .json({ error: `cannot find product with productId ${productId}` });
+      } else {
+        res.status(200).json(product);
+      }
     })
     .catch(err => next(err));
 })
