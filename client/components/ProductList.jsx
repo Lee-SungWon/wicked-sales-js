@@ -29,7 +29,6 @@ class ProductList extends React.Component {
     return (
       this.state.products.map(product => {
         return (
-          <div className="card">
             <ProductListItem
               key={product.productId}
               image={product.image}
@@ -37,7 +36,6 @@ class ProductList extends React.Component {
               price={product.price}
               shortDescription={product.shortDescription}
             />
-          </div>
         );
       })
     )

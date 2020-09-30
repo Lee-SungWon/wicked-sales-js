@@ -22,7 +22,7 @@ export default class App extends React.Component {
     return (
       <>
         <Header />
-        <div className="flex row">
+        <div className="container d-flex flex-wrap">
           <ProductList />
         </div>
       </>

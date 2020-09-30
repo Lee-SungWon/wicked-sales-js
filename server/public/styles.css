@@ -1,13 +1,10 @@
 .box {
-  width: 500px;
-  background-color: red;
+  width: 300px;
+  height: 430px;
+  border: 1px lightgray solid;
 }
 
 img {
-  width: 150px;
-}
-
-.card {
-  width: 250px;
-  height: 250px;
+  width: 230px;
+  height: 180px;
 }
