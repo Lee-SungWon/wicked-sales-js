@@ -27,14 +27,11 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      this.state.products.map(product => {
+      this.state.products.map((product) => {
         return (
             <ProductListItem
-              key={product.productId}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              shortDescription={product.shortDescription}
+              product={product}
+              setView={this.props.setView}
             />
         );
       })
