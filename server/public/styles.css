@@ -4,7 +4,22 @@
   border: 1px lightgray solid;
 }
 
+.box-details {
+  display: inline-block;
+  border: 1px lightgray solid;
+  padding: 5px;
+}
+
 img {
   width: 230px;
   height: 180px;
+}
+
+.price {
+  color: gray;
+  font-size: 1.3rem;
+}
+
+.pointer:hover {
+  cursor: pointer;
 }
