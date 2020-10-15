@@ -23,3 +23,7 @@ img {
 .pointer:hover {
   cursor: pointer;
 }
+
+.header-cart {
+  font-size: 25px;
+}

@@ -1,16 +1,32 @@
 import React from 'react';
 
-function Header() {
-  return (
-    <header>
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleCartClick = this.handleCartClick.bind(this);
+  }
+
+  handleCartClick() {
+    this.props.setView('cart', {});
+  }
+
+  render() {
+    return (
       <header>
-        <h3 className="ml-5">
-          <i className="mr-2 fas fa-dollar-sign"></i>
+        <div className="d-flex justify-content-between">
+          <h3 className="ml-5">
+            <i className="mr-2 fas fa-dollar-sign"></i>
           Wicked Sales
         </h3>
+          <div className="mr-5 header-cart" onClick={this.handleCartClick}>
+            <span>{this.props.cartItemCount} Items</span>
+            <i className="fas fa-shopping-cart ml-2"></i>
+          </div>
+        </div>
       </header>
-    </header>
-  );
+    )
+  };
 }
 
 export default Header;
