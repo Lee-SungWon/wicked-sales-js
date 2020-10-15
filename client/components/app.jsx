@@ -54,13 +54,14 @@ export default class App extends React.Component {
         this.setState({ cart: cart });
       })
       .catch(err => console.error(err));
+    console.log(this.state.cart)
   }
 
   render() {
     if (this.state.view.name === 'catalog') {
       return (
         <>
-          <Header setView={this.setView} cartItemCount={this.state.cart.length}/>
+          <Header setView={this.setView} cartItemCount={this.state.cart.length} />
           <div className="container d-flex flex-wrap">
             <ProductList setView={this.setView} />
           </div>
@@ -71,7 +72,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'details') {
       return (
         <>
-          <Header setView={this.setView} cartItemCount={this.state.cart.length}/>
+          <Header setView={this.setView} cartItemCount={this.state.cart.length} />
           <div>
             <ProductDetails setView={this.setView} productId={this.state.view.params.productId} addToCart={this.addToCart} />
           </div>
