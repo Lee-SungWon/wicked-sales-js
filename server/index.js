@@ -82,8 +82,7 @@ app.get('/api/cart', (req, res, next) => {
       join "products" as "p" using ("productId")
       where "c"."cartId" = $1
     `;
-    const cartIdValue = [req.session.cartId];
-    db.query(query, cartIdValue)
+    db.query(query, [req.session.cartId])
       .then(result => res.status(200).json(result.rows))
       .catch(err => next(err));
   }
@@ -92,30 +91,35 @@ app.get('/api/cart', (req, res, next) => {
 app.post('/api/cart/:productId', (req, res, next) => {
   const productId = Number(req.params.productId);
   if (!Number.isInteger(productId) || productId <= 0) {
-    res.status(400).json({ error: 'productId must be a positive integer' });
-    return;
+    return next(new ClientError('ProductId must be a positive integer', 400));
   }
 
-  const params = [productId];
-  const query = 'select "price" from "products" where "productId" = $1';
 
-  db.query(query, params)
-    .then(productRes => {
-      const product = productRes.rows[0];
+  const query = `
+  select "price"
+  from "products"
+  where "productId" = $1
+  `;
+
+  db.query(query, [productId])
+    .then(res => {
+      const product = res.rows[0];
       if (!product) {
-        throw new ClientError(
-          `cannot find product with productId ${productId}`,
-          400
-        );
+        throw new ClientError( `cannot find product with productId ${productId}`, 400 );
       }
 
       if (!req.session.cartId) {
-        const insertQuery =
-          'insert into "carts" ("cartId", "createdAt") values(default, default) returning *';
+        const query = `
+          insert into "carts" ("cartId", "createdAt")
+          values(default, default)
+          returning *
+        `;
 
-        return db.query(insertQuery).then(insertedRes => {
+
+        return db.query(query)
+        .then(res => {
           return {
-            cartId: insertedRes.rows[0].cartId,
+            cartId: res.rows[0].cartId,
             price: product.price
           };
         });
@@ -123,16 +127,19 @@ app.post('/api/cart/:productId', (req, res, next) => {
         return { cartId: req.session.cartId, price: product.price };
       }
     })
-    .then(result2 => {
-      req.session.cartId = result2.cartId;
-      const addItemQuery =
-        'insert into "cartItems" ("cartId", "productId", "price") values ($1, $2, $3) returning "cartItemId"';
-      const addItemValues = [req.session.cartId, productId, result2.price];
+    .then(res => {
+      req.session.cartId = res.cartId;
+      const addItemQuery = `
+        insert into "cartItems"("cartId", "productId", "price")
+        values($1, $2, $3)
+        returning "cartItemId"
+      `
+      const addItemValues = [req.session.cartId, productId, res.price];
       return db.query(addItemQuery, addItemValues).then(addedToCartRes => {
         return addedToCartRes.rows[0].cartItemId;
       });
     })
-    .then(result3 => {
+    .then(data => {
       const cartInfoQuery = `
         select
           "c"."cartItemId",
@@ -145,14 +152,47 @@ app.post('/api/cart/:productId', (req, res, next) => {
         join "products" as "p" using ("productId")
         where "c"."cartItemId" = $1;
       `;
-      const cartInfoValues = [result3];
-      return db.query(cartInfoQuery, cartInfoValues).then(finalRes => {
-        res.status(201).json(finalRes.rows[0]);
+      const cartInfoValues = [data];
+      return db.query(cartInfoQuery, cartInfoValues).then(result => {
+        res.status(201).json(result.rows[0]);
       });
     })
     .catch(err => {
       next(err);
     });
+});
+
+
+app.post('/api/orders', (req, res, next) => {
+  if (!req.session.cartId) {
+    res.status(400).json({ error: 'there is no cart for this session' });
+    return;
+  }
+
+  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+    res.status(400).json({ error: 'missing one or more of required fields' });
+    return;
+  }
+
+  const query = `
+    insert into "orders" ("cartId", "name", "creditCard", "shippingAddress")
+    values ($1, $2, $3, $4)
+    returning *;
+    `;
+
+  const params = [
+    req.session.cartId,
+    req.body.name,
+    req.body.creditCard,
+    req.body.shippingAddress
+  ];
+
+  db.query(query, params)
+    .then(result => {
+      delete req.session.cartId;
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
