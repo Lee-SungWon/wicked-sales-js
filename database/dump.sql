@@ -229,39 +229,6 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 --
 
 COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
-1	4	1	2999
-2	4	1	2999
-3	4	1	2999
-4	4	1	2999
-5	4	1	2999
-6	4	1	2999
-7	4	1	2999
-8	4	1	2999
-9	4	1	2999
-10	4	1	2999
-11	4	1	2999
-12	4	1	2999
-13	4	1	2999
-14	4	1	2999
-15	4	1	2999
-16	4	1	2999
-17	4	1	2999
-18	4	1	2999
-19	4	1	2999
-20	4	1	2999
-21	4	1	2999
-22	4	1	2999
-23	4	1	2999
-24	4	1	2999
-25	4	1	2999
-26	4	1	2999
-27	4	1	2999
-28	4	1	2999
-29	4	1	2999
-30	4	1	2999
-31	4	2	2595
-32	4	1	2999
-33	4	1	2999
 \.
 
 
@@ -270,10 +237,6 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 --
 
 COPY public.carts ("cartId", "createdAt") FROM stdin;
-1	2020-10-15 21:44:10.574547+00
-2	2020-10-15 21:44:10.957109+00
-3	2020-10-15 21:46:06.16248+00
-4	2020-10-15 22:00:10.54943+00
 \.
 
 
@@ -290,12 +253,12 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 --
 
 COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-1	Shake Weight	2999	/images/shake-weight.jpg	Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-2	ShamWow	2595	/images/shamwow.jpg	It's like a chamois, towel, and sponge, all in one! Soaks up to 10x it's weight in any liquid!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-3	Snuggie	2900	/images/snuggie.jpg	Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-4	Wax Vac	999	/images/wax-vac.jpg	Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-5	Ostrich Pillow	9900	/images/ostrich-pillow.jpg	Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-6	Tater Mitts	830	/images/tater-mitts.jpg	8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock.\\nAesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
+10	Stacker	900	/images/stacker.png	Classic stacking toy with 6 colorful rings to grasp, shake, and stack.	Encourages the development of hand-eye coordination and motor skills.
+12	Bowling Play Set	1400	images/bowling.png	Comprehensive interactive play between children. Excellent for all kinds of parties, events, and school activities.	Helps in developing gross motor skills, spatial awareness, hand-eye coordination and balance. Suitable for indoor and outdoor play, it is designed for children ages 1 and up. This is an excellent choice for early childhood education programs, festivals, and birthday gifts.
+13	Baby Gym	5400	images/gym.png	Play mat is made of organic cotton and is machine washable.	This baby activity mat helps build strong motor-skills and hand-eye coordination. Explore 3 Touchable, squeezable, and sensory toys that magically float above! This activity Gym for infants includes friendly fabric stars, a cloud-shaped mirror, and some fun beads.
+15	Toss Set	1900	images/toss.png	Ring toss game. Come on, join the game!	Colorful rings and stacking cups to attract attention. And they can help kinds be familiar with colors.
+18	Soft Building Blocks	1500	images/blocks.png	A baby blocks set includes 12 pieces blocks.	Each blocks has an embossed animal,shape,fruit, arabic numerals and geometrical patterns on the sides. Children can develop their sense of touch and vision by touching and observing these embossed patterns. This amazing blocks can help baby better grow up in their early childhood development.
+19	Foam Play Mat	3500	images/mat.png	Each piece fits together in every direction.	Item comes with 36 tiles in 9 colors and 54 end borders. Perfect for early shape and color recognition.
 \.
 
 
@@ -324,7 +287,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+SELECT pg_catalog.setval('public."products_productId_seq"', 19, true);
 
 
 --
